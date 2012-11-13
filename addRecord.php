@@ -1,3 +1,15 @@
+<?php
+  $conn = mysql_connect("mysql.cis.ksu.edu", "colecoop", "insecurepassword");
+  
+  if ($conn) {
+    mysql_select_db("colecoop", $conn);
+    $result = mysql_query("SELECT CountyName FROM agcom_counties");
+    while($array[] = mysql_fetch_array($result, MYSQL_ASSOC));
+
+    mysql_close($conn);
+  }
+
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,7 +31,14 @@ Add New Record:
 
 <form action="addRecordSQL.php" method="post">
 Year: <input type="text" name="year"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-County: <input type="text" name="county"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+County: <select name="county">
+<?php 
+  foreach($array as $row) {
+    print "<option value=\"" . $row["CountyName"] . "\">" . $row["CountyName"] . "</option>";
+  }
+?>
+</select>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Commodity: <input type="text" name="commodity"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Measurement Unit: <input type="text" name="measurement"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Value: <input type="text" name="value"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
