@@ -78,6 +78,9 @@ Sort Output Values From:
 <div id="tablechart" style="width:960px;border:2px outset black;border-width:10px">
 List Table:
 </div>
+<div style="width:960px;border:2px outset black;border-width:10px">
+<a href="./addRecord.php">Add New Record</url>
+</div>
 
 </div>
 </body>
