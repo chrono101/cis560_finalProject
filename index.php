@@ -12,7 +12,7 @@ google.setOnLoadCallback(drawGeochart);
 
 function drawGeochart() {
   var jsonData = $.ajax({
-    url: "getDataJSON.php?table=ag_wheatProduction&start=0&num=105",
+    url: "getDataJSON.php?type=Wheat&year=2012&&start=0&num=105",
     dataType: "json",
     async: false
    }).responseText;
