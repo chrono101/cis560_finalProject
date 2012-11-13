@@ -79,7 +79,9 @@ Sort Output Values From:
 List Table:
 </div>
 <div style="width:960px;border:2px outset black;border-width:10px">
-<a href="./addRecord.php">Add New Record</url>
+<form action="./addRecord.php">
+<input type="submit" value="Add New Record">
+</form>
 </div>
 
 </div>
