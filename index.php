@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Kansas Ag Data Map Example</title>
+<title>Kansas Counties Agricultural Output</title>
 
 <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -48,7 +48,7 @@ Search Database:
 
 <div align = "center" style="width:950px;border:2px outset black;border-width:4px">
 
-<form action="/html/tags/html_form_tag_action.cfm" method="get">
+<form action="/" method="get">
 Select a Year:
 <select id="selectYear">
   <option value="2011">2011</option>
