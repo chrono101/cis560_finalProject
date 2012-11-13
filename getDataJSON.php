@@ -1,7 +1,11 @@
 <?php
-  $tableName = $_GET["table"];    // The name of the table to SELECT from
   $startRecord = $_GET["start"];  // The record to start on
   $numRecords = $_GET["num"];     // The number of records to retrieve
+  $commodity = $_GET["comm"];     // The type of commodity
+  $county = $_GET["county"];      // The name of the county
+  $sort = $_GET["sort"];          // The sorting order (high to low or high to low)
+  $measure = $_GET["measure"];    // The measurement type of the commodity
+  $year = $_GET["year"];          // The year information is taken from
 
   // Connect to the database
   $conn = mysql_connect("mysql.cis.ksu.edu", "colecoop", "insecurepassword");
@@ -10,31 +14,59 @@
   if($conn) {
     // Select the database and run the query
     mysql_select_db("colecoop", $conn);
-    $result = mysql_query("SELECT * FROM " . $tableName . " LIMIT " . $startRecord . "," . $numRecords);
+
+    if ($commodity || $county || $sort || $measure || $year) {
+      $whereClause = " WHERE ";
+      if ($commodity) {
+        $whereClause .= " type=" . $commodity;
+        if ($county || $measure || $year) {
+          $whereClause .= " AND";
+        }
+      }
+      if ($county) {
+        $whereClause .= " CountyName=" . $county;
+        if ($measure || $year) {
+          $whereClause .= " AND";
+        }
+      }
+      if ($measure) {
+        $whereClause .= " measurement=" . $measure;
+        if ($year) {
+          $whereClause .= " AND";
+        }
+      }
+      if ($year) {
+        $whereClause .= " year=" . $year;
+      }
+    }
+
+    if ($sort) {
+      $sortClause = "ORDER BY agcom_commodities.value";
+      if ($sort == "HighToLow") {
+        $sortClause .= " DESC";
+      }
+      else {
+        $sortClause .= " ASC";
+      }
+    }
+    print "SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords;
+
+    $result = mysql_query("SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords);
     
     // Pull the entire result into a single assosciative array
     while ($array[] = mysql_fetch_array($result, MYSQL_ASSOC));
-
+    print_r ($array);
     // Print out the table in the DataTable JSON format
     // NOTE: To be valid JSON, all fields must be encapsulated in double quotes ""
     // First the columns 
     $i = 0;
     print "{\n\t\"cols\": [";
-    $keys = array_keys($array[0]); // Get the keys of the first record
-    foreach ($keys as $key) {
-      print "{\"id\": \"" . $key . "\", \"label\": \"" . $key . "\", \"type\": \"";
-      $type = mysql_field_type($result, $i);
-      if ($type == "int" || $type == "real" || $type == "decimal") {
-        print "number";
-      } else {
-        print "string";
-      }
-      print "\"}";
-      if ($key !== end($keys)) print ", ";
-      print "\n\t\t";
-      $i++;
-    }
+    print "{\"id\": \"LATITUDE\" , \"label\": \"Latitude\" , \"type\": \"number\"},\n\t\t";
+    print "{\"id\": \"LONGITUDE\", \"label\": \"Longitude\", \"type\": \"number\"},\n\t\t";
+    print "{\"id\": \"COUNTY\", \"label\": \"County\", \"type\": \"string\"},\n\t\t";
+    print "{\"id\": \"VALUE\", \"label\": \"measurement\", \"type\": \"number\"}\n\t\t";
     print "],\n\t\"rows\": [";
+
     // Now print the rows
     $i = 0;
     foreach ($array as $row) {
