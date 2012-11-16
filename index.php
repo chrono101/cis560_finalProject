@@ -9,6 +9,8 @@
 <script type="text/javascript">
 google.load('visualization', '1', {packages: ['geochart']});
 google.setOnLoadCallback(drawGeochart);
+google.load('visualization', '1', {packages: ['table']});
+google.setOnLoadCallback(drawTable);
 
 function drawGeochart() {
   var jsonData = $.ajax({
@@ -30,6 +32,19 @@ function drawGeochart() {
 
   var geochart = new google.visualization.GeoChart(document.getElementById('geochart'));
   geochart.draw(data, options);
+}
+
+function drawTable() {
+      var jsonData = $.ajax({
+        url: "getDataJSON.php?type=Wheat&year=2012&start=0&num=105",
+        dataType: "json",
+        async: false
+        }).responseText;
+
+        data = new google.visualization.DataTable(jsonData);
+
+        table = new google.visualization.Table(document.getElementById('tablechart'));
+        table.draw(data, {showRowNumber: true});
 }
 
 </script>
@@ -75,9 +90,7 @@ Sort Output Values From:
 
 </div>
 
-<div id="tablechart" style="width:960px;border:2px outset black;border-width:10px">
-List Table:
-</div>
+<div id="tablechart" style="width:960px;border:2px outset black;border-width:10px"></div>
 <div style="width:960px;border:2px outset black;border-width:10px">
 <form action="./addRecord.php">
 <input type="submit" value="Add New Record">

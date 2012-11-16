@@ -31,7 +31,7 @@ Add New Record:
 
 <form action="addRecordSQL.php" method="post">
 Year: <input type="text" name="year"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-County: <select name="county">
+County: <select style="width:142px" name="county">
 <?php 
   foreach($array as $row) {
     print "<option value=\"" . $row["CountyName"] . "\">" . $row["CountyName"] . "</option>";
