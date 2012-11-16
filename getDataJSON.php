@@ -18,25 +18,25 @@
     if ($commodity || $county || $sort || $measure || $year) {
       $whereClause = " WHERE ";
       if ($commodity) {
-        $whereClause .= " type=" . $commodity;
+        $whereClause .= " type='" . $commodity . "'";
         if ($county || $measure || $year) {
           $whereClause .= " AND";
         }
       }
       if ($county) {
-        $whereClause .= " CountyName=" . $county;
+        $whereClause .= " CountyName='" . $county . "'";
         if ($measure || $year) {
           $whereClause .= " AND";
         }
       }
       if ($measure) {
-        $whereClause .= " measurement=" . $measure;
+        $whereClause .= " measurement='" . $measure . "'";
         if ($year) {
           $whereClause .= " AND";
         }
       }
       if ($year) {
-        $whereClause .= " year=" . $year;
+        $whereClause .= " year='" . $year . "'";
       }
     }
 
@@ -49,13 +49,13 @@
         $sortClause .= " ASC";
       }
     }
-    print "SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords;
+    //print "SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords;
 
     $result = mysql_query("SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords);
     
     // Pull the entire result into a single assosciative array
     while ($array[] = mysql_fetch_array($result, MYSQL_ASSOC));
-    print_r ($array);
+    //print_r ($array);
     // Print out the table in the DataTable JSON format
     // NOTE: To be valid JSON, all fields must be encapsulated in double quotes ""
     // First the columns 
@@ -71,10 +71,15 @@
     $i = 0;
     foreach ($array as $row) {
       print "{\"c\":[";
-      foreach ($row as $col) {
-        print "{\"v\": \"" . $col . "\"}";
-        if ($col !== end($row)) print ", ";
-      }
+      // Latitude
+      print "{\"v\": \"" . $row["latitude"] . "\"},";
+      // Logitude 
+      print "{\"v\": \"" . $row["longitude"] . "\"},";
+      // County Name
+      print "{\"v\": \"" . $row["CountyName"] . "\"},";
+      // Value
+      print "{\"v\": \"" . $row["value"] . "\"}";
+
       print "]}"; 
       if ($i == ($numRecords - 1 )) break;
       if ($row !== end($array)) print ", ";
