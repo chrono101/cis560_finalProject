@@ -12,18 +12,20 @@ google.setOnLoadCallback(drawGeochart);
 
 function drawGeochart() {
   var jsonData = $.ajax({
-    url: "getDataJSON.php?type=Wheat&year=2012&start=0&num=105",
+    url: "getDataJSON.php?type=Wheat&year=2012&start=0&num=105&measure=Production",
     dataType: "json",
     async: false
    }).responseText;
-  
-  var data = new google.visualization.DataTable(jsonData);
-  
+
+  var data = new google.visualization.DataTable(jsonData);  
   
   var options = {
     resolution: 'provinces',
     region: 'US-KS',
     displayMode: 'markers',
+    magnifyingGlass: { 
+      enable: false
+    },
     width: 960,
     colorAxis: {colors: ['blue', 'green', 'yellow', 'orange', 'red']}
   };

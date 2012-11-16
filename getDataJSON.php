@@ -16,7 +16,7 @@
     mysql_select_db("colecoop", $conn);
 
     if ($commodity || $county || $sort || $measure || $year) {
-      $whereClause = " WHERE ";
+      $whereClause = " WHERE agcom_commodities.CountyName=agcom_counties.CountyName AND agcom_commodities.mid=agcom_measurement.mid AND";
       if ($commodity) {
         $whereClause .= " type='" . $commodity . "'";
         if ($county || $measure || $year) {
@@ -55,7 +55,9 @@
     
     // Pull the entire result into a single assosciative array
     while ($array[] = mysql_fetch_array($result, MYSQL_ASSOC));
+    
     //print_r ($array);
+    
     // Print out the table in the DataTable JSON format
     // NOTE: To be valid JSON, all fields must be encapsulated in double quotes ""
     // First the columns 
@@ -64,7 +66,7 @@
     print "{\"id\": \"LATITUDE\" , \"label\": \"Latitude\" , \"type\": \"number\"},\n\t\t";
     print "{\"id\": \"LONGITUDE\", \"label\": \"Longitude\", \"type\": \"number\"},\n\t\t";
     print "{\"id\": \"COUNTY\", \"label\": \"County\", \"type\": \"string\"},\n\t\t";
-    print "{\"id\": \"VALUE\", \"label\": \"measurement\", \"type\": \"number\"}\n\t\t";
+    print "{\"id\": \"VALUE\", \"label\": \"" . $measure  . "\", \"type\": \"number\"}\n\t\t";
     print "],\n\t\"rows\": [";
 
     // Now print the rows
