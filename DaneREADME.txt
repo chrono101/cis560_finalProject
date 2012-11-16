@@ -10,3 +10,7 @@ git commit -m "This is what I have changed."
 tornadominds
 password
 git push
+
+===Discard Changes, Update:
+git stash
+git pull
