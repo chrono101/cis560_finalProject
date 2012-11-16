@@ -54,9 +54,10 @@
 </div>
 <div align="center">
   <div style="width:960px;border:2px outset black;border-width:10px">
-      <form action="importFileSQL.php" method="post">
-        <input id="inputFile name="inputFile" type="file">
+      <form action="importFileSQL.php" method="post" enctype="multipart/form-data">
+        <input id="inputFile" name="inputFile" type="file">
         <input id="importFile" type="submit" value="Import File">
+	 <a href="./index.php">Cancel</a>
       </form>
   </div>
 </div>
