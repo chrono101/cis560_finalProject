@@ -58,7 +58,7 @@ Value: &nbsp;&nbsp;
 
 </div>
 
-<div align = "center" style="width:170px;>
+<div align = "center" style="width:170px;">
 <form action="addRecordSQL.php" method="post" style="float:left">
 <input type="submit" value="Save Record" href="addRecordSQL.php" value="Cancel">
 </form>
