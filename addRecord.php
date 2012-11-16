@@ -41,6 +41,8 @@ Value: &nbsp;&nbsp;
 </div>
 
 <div align = "left" style="float:right;width:50%;">
+<form action="addRecordSQL.php" method="post">
+
 <input id="year" type="text" name="year" style="width:140px"><br>
 <select id="county" style="width:146px" name="county">
 <?php 
@@ -53,19 +55,20 @@ Value: &nbsp;&nbsp;
 <input id="commodity" type="text" name="commodity" style="width:140px"><br>
 <input id="measurement" type="text" name="measurement" style="width:140px"><br>
 <input id="value" type="text" name="value" style="width:140px"><br>
-<div align="center">
+
+<input type="submit" value="Save Record" href="addRecordSQL.php" value="Cancel">
+</form>
+<form action="index.php">
+<input type="submit" value="Cancel">
+</form>
+
 </div>
 
 </div>
 
 <div align = "center" style="width:170px;>
-<form action="addRecordSQL.php" method="post" style="float:left">
-<input type="submit" value="Save Record" href="addRecordSQL.php" value="Cancel">
-</form>
 
-<form action="index.php" style="float:right">
-<input type="submit" value="Cancel">
-</form>
+
 </div>
 
 </div>
