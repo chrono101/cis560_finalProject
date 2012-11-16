@@ -20,7 +20,7 @@
   <div style="width:960px;border:2px outset black;border-width:10px">
     <h1>Kansas Counties Agricultural Output</h1>
   </div>
-  <div style="width:960px;border:2px outset black;border-width:10px;height:400px">
+  <div style="width:960px;border:2px outset black;border-width:10px;height:200px">
     <div align = "center" style="float:top;width:100%;border:2px outset black;border-width:4px">
       Add New Record:
     </div>
@@ -49,8 +49,16 @@
       <input type="submit" value="Save Record">
       <a href="./index.php">Cancel</a>
     </form>
+    </div>
   </div>
 </div>
+<div align="center">
+  <div style="width:960px;border:2px outset black;border-width:10px">
+      <form action="importFileSQL.php" method="post">
+        <input id="inputFile name="inputFile" type="file">
+        <input id="importFile" type="submit" value="Import File">
+      </form>
+  </div>
 </div>
 </body>
 </html>
