@@ -18,10 +18,10 @@ if ($fileType != "csv"){
     $file = fopen($filePath, 'r');
     if ($file == TRUE) {
       while (($data = fgetcsv($file, 1000, ",")) !== FALSE) {
-          echo "Year: " . $data[0] . " County: " . $data[1] . " MID: " . $data[2] . " Value: " . $data[3] . " Measurement: " . $data[4] . "<br>";
-//        mysql_query("INSERT INTO ag_counties (year, countyName, mid, value, measurement) VALUES ('$data[0]', '$data[1]', '$data[2]'), '$data[3]'), '$data[4]')");
+        echo "Year: " . $data[0] . " County: " . $data[1] . " MID: " . $data[2] . " Value: " . $data[3] . " Measurement: " . $data[4];
+        //mysql_query("INSERT INTO ag_counties (year, countyName, mid, value, measurement) VALUES ('$data[0]', '$data[1]', '$data[2]'), '$data[3]'), '$data[4]')");
       }
-//    print "County data added successfully." . "<br>";
+      //print "County data added successfully." . "<br>";
     } else {
       print "Error opening file: $filePath" . "<br>";
     } 

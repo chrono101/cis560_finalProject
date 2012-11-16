@@ -14,7 +14,7 @@ google.setOnLoadCallback(drawTable);
 
 function drawGeochart() {
   var jsonData = $.ajax({
-    url: "getDataJSON.php?type=Wheat&year=2012&start=0&num=105&measure=Production",
+    url: "getDataJSON.php?type=Corn&year=2011&start=0&num=105&measure=Bushels",
     dataType: "json",
     async: false
    }).responseText;
@@ -38,7 +38,7 @@ function drawGeochart() {
 
 function drawTable() {
       var jsonData = $.ajax({
-        url: "getDataJSON.php?type=Wheat&year=2012&start=0&num=105&measure=Production",
+        url: "getDataJSON.php?type=Corn&year=2011&start=0&num=105&measure=Bushels",
         dataType: "json",
         async: false
         }).responseText;
