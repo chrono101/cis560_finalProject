@@ -1,104 +1,76 @@
+<?php
+  // Connect to the database
+  $conn = mysql_connect("mysql.cis.ksu.edu", "colecoop", "insecurepassword");
+  if ($conn) {
+    mysql_select_db("colecoop", $conn);
+    $query = "SELECT type FROM agcom_commodities GROUP BY type";
+    $result = mysql_query($query);
+    while ($commoditiesArray[] = mysql_fetch_array($result, MYSQL_ASSOC));
+  }
+  mysql_close($conn);
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Kansas Counties Agricultural Output</title>
 
+<link rel="stylesheet" type="text/css" href="style.css">
+
 <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
-google.load('visualization', '1', {packages: ['geochart']});
-google.setOnLoadCallback(drawGeochart);
-google.load('visualization', '1', {packages: ['table']});
-google.setOnLoadCallback(drawTable);
-
-function drawGeochart() {
-  var jsonData = $.ajax({
-    url: "getDataJSON.php?type=Corn&year=2011&start=0&num=105&measure=Bushels",
-    dataType: "json",
-    async: false
-   }).responseText;
-
-  var data = new google.visualization.DataTable(jsonData);  
-  
-  var options = {
-    resolution: 'provinces',
-    region: 'US-KS',
-    displayMode: 'markers',
-    magnifyingGlass: { 
-      enable: false
-    },
-    width: 960,
-    colorAxis: {colors: ['blue', 'green', 'yellow', 'orange', 'red']}
-  };
-
-  var geochart = new google.visualization.GeoChart(document.getElementById('geochart'));
-  geochart.draw(data, options);
-}
-
-function drawTable() {
-      var jsonData = $.ajax({
-        url: "getDataJSON.php?type=Corn&year=2011&start=0&num=105&measure=Bushels",
-        dataType: "json",
-        async: false
-        }).responseText;
-
-        data = new google.visualization.DataTable(jsonData);
-
-        table = new google.visualization.Table(document.getElementById('tablechart'));
-        table.draw(data, {showRowNumber: true});
-}
-
-</script>
+<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-<div align = "center">
+<div id="container">
+  <div class="border-big">
+    <h1>Kansas Counties Agricultural Output</h1>
+  </div>
 
-<div style="width:960px;border:2px outset black;border-width:10px">
-<h1>Kansas Counties Agricultural Output</h1>
-</div>
+  <div id="geochart" class="border-big">
+  </div>
+  
+  <div class="border-big">
+    Search Database:
+    <div class="border-small">
+      <form id="searchForm" action="/" method="post">
+        Select a Commodity:
+        <select id="selectCommodity">
+        <?php
+          foreach($commoditiesArray as $row) {
+            print "<option value=\"" . $row["type"] . "\">" . $row["type"] . "</option>";
+          }
+        ?>
+        </select> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        In Year:
+        <select id="selectYear">
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Where:
+        <select id="selectMeasure">
+        </select>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Is:
+        <select id="selectOperator">
+          <option value="eq">equal to</option>
+          <option value="lt">less than</option>
+          <option value="gt">greater than</option>
+        </select>
+        Value:
+        <input id="inputValue" type="number" value="" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="searchFormSubmit" type="submit" value="Submit" />
+      </form>
+    </div>
+  </div>
 
-<div id="geochart" style="width:960px;border:2px outset black;border-width:10px"></div>
-<div style="width:960px;border:2px outset black;border-width:10px">
-
-Search Database:
-
-<div align = "center" style="width:950px;border:2px outset black;border-width:4px">
-
-<form action="/" method="get">
-Select a Year:
-<select id="selectYear">
-  <option value="2011">2011</option>
-  <option value="2012">2012</option>
-</select>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Select a Commodity:
-<select id="selectCommodity">
-  <option value="Wheat">Wheat</option>
-  <option value="Corn">Corn</option>
-  <option value="Cattle">Cattle</option>
-</select> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Sort Output Values From:
-<select id="sortOrder">
-  <option value="HighToLowWheat">High to Low</option>
-  <option value="LowToHigh">Low to High</option>
-</select> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input id="submit" type="submit" value="Submit" />
-</form>
-
-</div>
-
-</div>
-
-<div id="tablechart" style="width:960px;border:2px outset black;border-width:10px"></div>
-<div style="width:960px;border:2px outset black;border-width:10px">
-<form action="./addRecord.php">
-<input type="submit" value="Add New Record">
-</form>
-</div>
-
-</div>
+  <div id="tablechart" class="border-big">
+  </div>
+  
+  <div class="border-big">
+    <a href="addRecord.php">Add Record</a>
+  </div>
+</div> <!-- /#container -->
 </body>
 </html>

@@ -6,6 +6,8 @@
   $sort = $_GET["sort"];          // The sorting order (high to low or high to low)
   $measure = $_GET["measure"];    // The measurement type of the commodity
   $year = $_GET["year"];          // The year information is taken from
+  $operator = $_GET["op"];        // The operator (less than, greater than, etc.)
+  $value = $_GET["val"];          // The value for the operator
 
   // Connect to the database
   $conn = mysql_connect("mysql.cis.ksu.edu", "colecoop", "insecurepassword");
@@ -15,10 +17,29 @@
     // Select the database and run the query
     mysql_select_db("colecoop", $conn);
 
-    if ($commodity || $county || $sort || $measure || $year) {
+    if ($commodity || $county || $value || $measure || $year) {
       $whereClause = " WHERE agcom_commodities.CountyName=agcom_counties.CountyName AND agcom_commodities.mid=agcom_measurement.mid AND";
       if ($commodity) {
         $whereClause .= " type='" . $commodity . "'";
+        if ($county || $value || $measure || $year) {
+          $whereClause .= " AND";
+        }
+      }
+      if ($value) {
+        switch ($operator) {
+          case "eq":
+            $opLiteral = "=";
+            break;
+          case "lt":
+            $opLiteral = "<";
+            break;
+          case "gt":
+            $opLiteral = ">";
+            break;
+          default:
+            $opLiteral = "=";
+        }
+        $whereClause .= " value" . $opLiteral . $value;
         if ($county || $measure || $year) {
           $whereClause .= " AND";
         }
@@ -49,10 +70,10 @@
         $sortClause .= " ASC";
       }
     }
-    //print "SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords;
 
-    $result = mysql_query("SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords);
-    
+    $query = "SELECT * FROM agcom_commodities JOIN agcom_counties JOIN agcom_measurement" . $whereClause . $sortClause . " LIMIT " . $startRecord . "," . $numRecords;
+    $result = mysql_query($query);
+        
     // Pull the entire result into a single assosciative array
     while ($array[] = mysql_fetch_array($result, MYSQL_ASSOC));
     

@@ -1,0 +1,16 @@
+body {
+
+}
+
+#container {
+  margin: 0 auto 0 auto;
+  width: 960px;
+}
+
+.border-small {
+  border: 2px outset black;
+}
+
+.border-big {
+  border: 4px outset black;
+}
