@@ -15,6 +15,8 @@ $(document).ready(function() {
     return false;
   });
 
+  $("#tabs").tabs();
+
   // Register an event handler for the "on change" event of the commodity drop-down menu
   $("#selectCommodity").change(function() {
     updateControls();
@@ -134,12 +136,16 @@ function drawTable() {
   }).responseText;
 
   //alert(jsonData);
+  var options = {
+    showRowNumber: true,
+    width: "100%"
+  }
 
   var data = new google.visualization.DataTable(jsonData);
 
   // This draws the table, using the Google API
   var table = new google.visualization.Table(document.getElementById('tablechart'));
-  table.draw(data, {showRowNumber: true});
+  table.draw(data, options);
 }
 
 // This table updates the current controls based upon which commodity is selected

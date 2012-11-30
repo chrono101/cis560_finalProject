@@ -1,5 +1,5 @@
 body {
-
+  font-family: Arial, sans-serif;
 }
 
 #container {
@@ -7,16 +7,65 @@ body {
   width: 960px;
 }
 
-.border-small {
-  border: 2px outset black;
+a:link, a:visited, a:hover {
+  color: black;
 }
 
-.border-big {
-  border: 4px outset black;
+#header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+#tablechart table {
+  margin: 0 auto 0 auto;
+}
+
+.controls {
+  border: 1px solid #AAAAAA;
+  border-radius: 4px;
+  background-color: #CCCCCC;
 }
 
 span {
   cursor: pointer;
   text-decoration: underline;
-  color: blue;
+  font-size: smaller;
+  color: black;
+}
+
+.ui-tabs {
+  padding: 0 0 0 0 !important;
+  border: none !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+  padding: 0 0 0 0 !important;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+#left-controls {
+  width: 50%;
+  text-align: right;
+  display: inline-block;
+}
+
+#right-controls {
+  float: right;
+  width: 50%;
+  text-align: left;
+  display: inline-block;
 }
