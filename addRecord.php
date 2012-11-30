@@ -47,6 +47,7 @@
           <input id="measurement" type="text" name="measurement" style="width:140px"><br>
           <input id="value" type="text" name="value" style="width:140px"><br>
           <input type="submit" value="Save Record">
+	   &nbsp;&nbsp;
           <a href="./index.php">(( Cancel ))</a>
         </form>
       </div>
