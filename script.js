@@ -20,6 +20,60 @@ $(document).ready(function() {
     updateControls();
   });
 
+  // Controls for the table pagination
+  $("#goFirst").click(function() {
+    tableStart = 0;
+    tableNumRecords = 10;
+    drawTable();
+  });
+
+  $("#goBack").click(function() {
+    if (tableStart < tableDefaultNum) {
+      tableStart = 0;
+    } else {
+      tableStart = tableStart - tableNumRecords;
+    }
+    drawTable();
+  });
+
+  $("#goNext").click(function() {
+    tableStart = tableStart + tableNumRecords;
+    drawTable();
+  });
+
+  $("#goLast").click(function() {
+    tableStart = tableMaxRecords - tableNumRecords;
+    drawTable();
+  });
+
+  $("#show1000").click(function() {
+    tableNumRecords = 1000;
+    drawTable();
+  });    
+
+  $("#show10").click(function() {
+    tableNumRecords = 10;
+    drawTable();
+  });
+
+  $("#show25").click(function() {
+    tableNumRecords = 25;
+    drawTable();
+  });
+
+  $("#show50").click(function() {
+    tableNumRecords = 50;
+    drawTable();
+  });  
+  
+  $("#show100").click(function() {
+    tableNumRecords = 100;
+    drawTable();
+  });
+
+
+
+
   updateControls();
 });
 
@@ -31,6 +85,12 @@ var selectedMeasure;
 var selectedOperator;
 var inputValue;
 
+// Table variables
+var tableStart = 0;
+var tableDefaultNum = 10;
+var tableNumRecords = tableDefaultNum;
+var tableMaxRecords = 1000;
+
 // Loads in the Google APIs
 google.load('visualization', '1', {packages: ['geochart']});
 google.setOnLoadCallback(drawGeochart);
@@ -40,7 +100,7 @@ google.setOnLoadCallback(drawTable);
 // This function makes an AJAX request to get the data to draw the geochart
 function drawGeochart() {
   var jsonData = $.ajax({
-    url: "getDataJSON.php?type="+selectedCommodity+"&year="+selectedYear+"&start=0&num=105&measure="+selectedMeasure+"&op="+selectedOperator+"&val="+inputValue,
+    url: "getDataGeochartJSON.php?type="+selectedCommodity+"&year="+selectedYear+"&start=0&num=105&measure="+selectedMeasure+"&op="+selectedOperator+"&val="+inputValue,
     dataType: "json",
     async: false
   }).responseText;
@@ -68,10 +128,12 @@ function drawGeochart() {
 // This function makes an AJAX request to get the data to draw the table 
 function drawTable() {
   var jsonData = $.ajax({
-    url: "getDataJSON.php?type=Corn&year=2011&start=0&num=105&measure=Bushels",
+    url: "getDataTableJSON.php?type="+selectedCommodity+"&year="+selectedYear+"&start=0&num=105&measure="+selectedMeasure+"&start="+tableStart+"&num="+tableNumRecords,
     dataType: "json",
     async: false
   }).responseText;
+
+  //alert(jsonData);
 
   var data = new google.visualization.DataTable(jsonData);
 

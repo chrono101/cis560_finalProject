@@ -42,15 +42,15 @@
           }
         ?>
         </select> 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
         In Year:
         <select id="selectYear">
         </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
         Where:
         <select id="selectMeasure">
         </select>  
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
         Is:
         <select id="selectOperator">
           <option value="eq">equal to</option>
@@ -59,13 +59,17 @@
         </select>
         Value:
         <input id="inputValue" type="number" value="" />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
         <input id="searchFormSubmit" type="submit" value="Submit" />
       </form>
     </div>
   </div>
 
   <div id="tablechart" class="border-big">
+  </div>  
+  <div style="text-align:center">
+    <span id="goFirst">First</span> | <span id="goBack"> &lt;&lt; Back</span> | <span id="goNext">Next &gt;&gt;</span> | <span id="goLast">Last</span><br>  
+    <span id="show10">Show 10</span> | <span id="show25">Show 25</span> | <span id="show50">Show 50</span> | <span id="show100">Show 100</span> | <span id="show1000">Show 1000</span>
   </div>
   
   <div class="border-big">

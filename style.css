@@ -14,3 +14,9 @@ body {
 .border-big {
   border: 4px outset black;
 }
+
+span {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}

@@ -15,20 +15,28 @@ $mysqli->autocommit(FALSE); // Turn off autocommits
 // Open the file or exit if the file cannot be opened
 $file = fopen(($filePath), "r") or exit ("Can't open file.");
 // Read the file and insert the data into the mysql database
-while (($data = fgetcsv($file, 1000, ",")) != FALSE) {
+while (($data = fgetcsv($file, 1000, ",", '"')) != FALSE) {
+
+  // Make sure all words look like "This" and not "THIS" or "this"  
+  $data[1] = ucfirst(strtolower($data[1]));
+  $data[2] = ucfirst(strtolower($data[2]));
+  $data[3] = ucfirst(strtolower($data[3]));
+
   echo "Year: " . $data[0] . " County: " . $data[1] . " Value: " . $data[2]. " Measurement: " . $data[3] . "<br>";
 
-  if ($result = $mysqli->query("SELECT mid FROM agcom_measurement WHERE measurement = '$data[3]'"))  {
-    $row = $result->fetch_row();
-    $mid = $row[0];
+  $result = $mysqli->query("SELECT mid FROM agcom_measurement WHERE measurement = '$data[3]'");
+  if ($row = $result->fetch_assoc())  {
+    $mid = $row["mid"];
+    print "MID $mid pulled from database.<br>";
   } else {
     $query_ok = TRUE; 
     $mysqli->query("INSERT INTO agcom_measurement (measurement) VALUES ('$data[3]')") ? NULL : $query_ok = FALSE;
     if ($query_ok) {
+      print "Measurement '$data[3]' added to database.<br>";
       $mysqli->commit();
     } else {
       $mysqli->rollback();
-      print "Unable to add measurement to the database.<br>";
+      print "Unable to add measurement '$data[3]' to the database.<br>";
       continue;
     }
 
