@@ -26,8 +26,10 @@
 <body>
 <div id="container">
   <div id="header">    
-    Kansas Counties Agricultural Output
+    <a href="index.php">Kansas Counties Agricultural Output</a>
   </div>
+   
+   <a href="addRecord.php">(( Add New Record ))</a>
 
    <div class="controls">
       <form id="searchForm" action="/" method="post">
@@ -58,10 +60,7 @@
     </div>
 
     
-  <div class="controls">
-    <a href="addRecord.php">(( Add Record ))</a>
-  </div>
-  <div id="tabs"> 
+   <div id="tabs"> 
     <ul>
       <li><a href="#tabs-1">Map View</a></li>
       <li><a href="#tabs-2">Table View</a></li>

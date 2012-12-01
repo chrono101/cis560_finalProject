@@ -18,6 +18,10 @@ a:link, a:visited, a:hover {
   margin-bottom: 7px;
 }
 
+#header a {
+  text-decoration: none;
+}
+
 #tablechart table {
   margin: 0 auto 0 auto;
 }

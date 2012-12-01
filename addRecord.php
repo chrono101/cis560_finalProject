@@ -17,10 +17,11 @@
   <title>Add New Record - Kansas Counties Agricultural Output</title>
 
   <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <body>
 <div id="container">
   <div id="header">
-    Kansas Counties Agricultural Output
+    <a href="index.php">Kansas Counties Agricultural Output</a>
   </div>
     Add New Record:
   <div class="controls">

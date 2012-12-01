@@ -101,8 +101,9 @@ google.setOnLoadCallback(drawTable);
 
 // This function makes an AJAX request to get the data to draw the geochart
 function drawGeochart() {
+  var requestURL = "getDataGeochartJSON.php?comm="+selectedCommodity+"&year="+selectedYear+"&start=0&num=105&measure="+selectedMeasure+"&op="+selectedOperator+"&val="+inputValue;
   var jsonData = $.ajax({
-    url: "getDataGeochartJSON.php?type="+selectedCommodity+"&year="+selectedYear+"&start=0&num=105&measure="+selectedMeasure+"&op="+selectedOperator+"&val="+inputValue,
+    url: requestURL,
     dataType: "json",
     async: false
   }).responseText;
@@ -119,7 +120,8 @@ function drawGeochart() {
       enable: false
     },
     width: 960,
-       colorAxis: {colors: ['blue', 'green', 'yellow', 'orange', 'red']}
+    //colorAxis: {colors: ['blue', 'green', 'yellow', 'orange', 'red']}
+    colorAxis: {colors: ['red', 'orange', 'yellow', 'green']}
   };
 
   // This draws the chart, using the Google API
@@ -129,8 +131,9 @@ function drawGeochart() {
 
 // This function makes an AJAX request to get the data to draw the table 
 function drawTable() {
+  var requestURL = "getDataTableJSON.php?comm="+selectedCommodity+"&year="+selectedYear+"&start=0&num=105&measure="+selectedMeasure+"&start="+tableStart+"&num="+tableNumRecords;
   var jsonData = $.ajax({
-    url: "getDataTableJSON.php?type="+selectedCommodity+"&year="+selectedYear+"&start=0&num=105&measure="+selectedMeasure+"&start="+tableStart+"&num="+tableNumRecords,
+    url: requestURL,
     dataType: "json",
     async: false
   }).responseText;
