@@ -12,8 +12,7 @@
     
     if ($control == 'measurement') {
       // Get the measurments for the given commodity
-      $result = mysql_query("SELECT agcom_commodities.mid, measurement FROM agcom_measurement JOIN agcom_commodities WHERE type='"
-        . $commodity . "' AND agcom_commodities.mid=agcom_measurement.mid GROUP BY measurement");
+      $result = mysql_query("SELECT * FROM agcom_get_m WHERE type='" . $commodity . "' GROUP BY measurement");
       while ($array[] = mysql_fetch_array($result, MYSQL_ASSOC));
       foreach ($array as $row) {
          print "<option value=\"" . $row["measurement"] . "\">" . $row["measurement"] . "</option>";
@@ -21,7 +20,7 @@
 
     } else if ($control == 'year') {
       // Get the years for the given commodity
-      $result = mysql_query("SELECT year FROM agcom_commodities WHERE type='" . $commodity . "' GROUP BY year");
+      $result = mysql_query("SELECT * FROM agcom_get_y WHERE type='" . $commodity . "' GROUP BY year");
       while ($array[] = mysql_fetch_array($result, MYSQL_ASSOC));
       foreach($array as $row) {
         print "<option value=\"" . $row["year"] . "\">" . $row["year"] . "</option>";
