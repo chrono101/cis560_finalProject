@@ -77,10 +77,10 @@ $(document).ready(function() {
 });
 
 // Declare variables
-var selectedCommodity = "Cattle, cows, milk";
-var selectedYear = "2008";
+var selectedCommodity = "Land area, incl non-ag";
+var selectedYear = "2007";
 var selectedSort = "";
-var selectedMeasure = "Inventory";
+var selectedMeasure = "Acres";
 var selectedOperator = "";
 var inputValue = "";
 

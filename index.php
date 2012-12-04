@@ -35,18 +35,21 @@
       <form id="searchForm" action="/" method="post">
         Select a commodity:
         <select id="selectCommodity">
-        <?php
-          foreach($commoditiesArray as $row) {
-            print "<option value=\"" . $row["type"] . "\"";
-            print  ">" . $row["type"] . "</option>";
-          }
-        ?>
+          <option value=""></option>
+          <?php
+            foreach($commoditiesArray as $row) {
+              print "<option value=\"" . $row["type"] . "\"";
+              print  ">" . $row["type"] . "</option>";
+            }
+          ?>
         </select> 
         in year
         <select id="selectYear">
+          <option value=""></option>
         </select>
         where
         <select id="selectMeasure">
+          <option value=""></option>
         </select>  
         is
         <select id="selectOperator">
