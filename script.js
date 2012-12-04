@@ -73,19 +73,16 @@ $(document).ready(function() {
     drawTable();
   });
 
-
-
-
   updateControls();
 });
 
 // Declare variables
-var selectedCommodity;
-var selectedYear;
-var selectedSort;
-var selectedMeasure;
-var selectedOperator;
-var inputValue;
+var selectedCommodity = "Cattle, cows, milk";
+var selectedYear = "2008";
+var selectedSort = "";
+var selectedMeasure = "Inventory";
+var selectedOperator = "";
+var inputValue = "";
 
 // Table variables
 var tableStart = 0;
@@ -120,7 +117,6 @@ function drawGeochart() {
       enable: false
     },
     width: 960,
-    //colorAxis: {colors: ['blue', 'green', 'yellow', 'orange', 'red']}
     colorAxis: {colors: ['red', 'orange', 'yellow', 'green']}
   };
 

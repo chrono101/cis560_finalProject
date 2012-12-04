@@ -37,7 +37,8 @@
         <select id="selectCommodity">
         <?php
           foreach($commoditiesArray as $row) {
-            print "<option value=\"" . $row["type"] . "\">" . $row["type"] . "</option>";
+            print "<option value=\"" . $row["type"] . "\"";
+            print  ">" . $row["type"] . "</option>";
           }
         ?>
         </select> 
